@@ -1,0 +1,83 @@
+[build-system]
+requires = [
+    "hatchling>=1.5.0",
+]
+build-backend = "hatchling.build"
+
+[project]
+name = "fASP"
+description = "Efficient enumeration of fixed points in Boolean networks using answer set programming"
+authors = [
+   { name = "Sylvain Soliman", email = "Sylvain.Soliman@inria.fr" },
+   { name = "Van-Giang Trinh", email = "giang.trinh91@gmail.com" },
+]
+license = "GPL-3.0"
+classifiers = [
+   "Development Status :: 4 - Beta",
+   "Programming Language :: Python :: 3",
+   "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+   "Operating System :: OS Independent",
+]
+dynamic = [
+   "version"
+]
+requires-python = ">=3.6"
+dependencies = [
+    "networkx>=2.2",
+    "pyeda>=0.28",
+]
+readme = "README.md"
+license-files = { paths = ["LICENSE"] }
+
+[project.urls]
+Code = "https://github.com/giang-trinh/fASP"
+
+[project.optional-dependencies]
+dev = [
+    "black",
+    "flake8-mypy",
+]
+
+[project.scripts]
+fASP = "fASP.fASP:main"
+
+[tool.hatch.version]
+path = "fASP/__init__.py"
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/fASP",
+]
+exclude = [
+    "/fASP/.mypy_cache/**",
+]
+
+[tool.hatch.envs.default]
+python = "39"
+
+[tool.hatch.envs.lint]
+detached = true
+dependencies = [
+    "pydocstyle",
+    "flake8",
+    "flake8-blind-except",
+    "flake8-bugbear",
+    "flake8-builtins",
+    "flake8-comprehensions",
+    "flake8-docstrings",
+    "flake8-import-order",
+    "flake8-mypy",
+    "flake8-polyfill",
+    "black",
+]
+python = "39"
+
+[tool.hatch.envs.lint.scripts]
+check = [
+    "flake8 --select=C,E,F,W,D,A,I,B --ignore=B950,E501,W503,E203 fASP",
+    "black --check --diff fASP",
+]
+fmt = [
+    "black fASP",
+    "check",
+]

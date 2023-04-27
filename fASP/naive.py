@@ -28,7 +28,7 @@ from . import pnml_to_asp
 def write_naive_asp(
     petri_net: nx.DiGraph, asp_file: IO, method: str, source_places: List[str]
 ):
-    "Write the ASP program for naive encoding of fixed points."
+    """Write the ASP program for naive encoding of fixed points."""
     counter = 1
 
     for node, data in petri_net.nodes(data=True):

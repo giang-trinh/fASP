@@ -21,15 +21,15 @@ import json
 import os
 import subprocess
 import sys
-import time
 import tempfile
-from typing import Generator, IO, List, Set
+import time
 from sys import setrecursionlimit
+from typing import Generator, IO, List, Set
 
+import networkx as nx
 
 from pyeda.boolalg.bdd import bddvar, expr2bdd
 from pyeda.boolalg.expr import expr
-import networkx as nx
 
 from . import version
 from .bnet import read_bnet
@@ -102,6 +102,7 @@ def solution_to_bool(places: List[str], sol: Set[str]) -> List[str]:
 
 
 def solution_to_bdd(places: List[str], source_nodes: List[str], sol: Set[str]):
+    """Do something."""
     normal_node = ""
     source_expr = []
 
@@ -129,7 +130,6 @@ def solution_to_bdd(places: List[str], source_nodes: List[str], sol: Set[str]):
 
 def place_in_sol(sol: Set[str], place: str) -> str:
     """Return 0/1 if place is absent, present in sol."""
-
     if "p" + place in sol:
         return "'" + place + "'" + ": 1"
     if "n" + place in sol:
@@ -268,6 +268,7 @@ def compute_fix_points(
 
 
 def main():
+    """Enumerate the fixed points."""
     parser = argparse.ArgumentParser(
         description=" ".join(__doc__.splitlines()[:3]) + " GPLv3"
     )
