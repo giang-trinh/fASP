@@ -1,0 +1,37 @@
+targets, factors
+SignalLIF, SignalLIF
+iGSK3b, iGSK3b
+bFGF, bFGF
+ActivinA, (!Sox2 & !Lefty1 & !Gbx2 & (Oct4 | (ActivinA & !Smad7 & !iAct)))
+Bmp4, (Gbx2 | Tbx3 | Myc | (!Smad7 & Bmp4 & !Smad6 & !iBMP))
+Dnmt3b, ((Mycn | Tcf3 | EpiTFs) & !(Cdx2 | Klf4))
+EpiTFs, (!Cdx2 & (Pitx2 | Dusp6 | (!Smad7 & Bmp4 & !Smad6 & !iBMP)) & !(Sox2 & Klf4))
+Esrrb, (!EpiTFs & (Klf4 | Klf2 | Nanog | (!Tcf3 & !Cdx2 & !iWnt & (iGSK3b | (SignalLIF & Fgfr2 & (bFGF | Fgf4))))))
+Fgfr2, (!Oct4 & !Nanog & (Cdx2 | Gcnf | (Fgfr2 & (bFGF | Fgf4))))
+Gata6, (!Klf2 & !Nanog & !Fgf4 & (Gata6 | (Fgfr2 & !iERK & (bFGF | Fgf4) & !(!Smad7 & Bmp4 & !Smad6 & !iBMP))))
+Gbx2, (!Tbx3 & (SignalLIF | (!Tcf3 & !Cdx2 & !iWnt & (iGSK3b | (SignalLIF & Fgfr2 & (bFGF | Fgf4))))) & (Esrrb | Jarid2))
+Gcnf, (!EpiTFs & (Cdx2 | Gata6))
+Jarid2, (Oct4 | Klf4)
+Klf4, (!EpiTFs & (SignalLIF | (Oct4 & Sox2 & Nanog & Esrrb & (Klf4 | Klf2))))
+Nanog, ((Tbx3 | Klf4 | Nanog | Lrh1 | (ActivinA & !Smad7 & !iAct) | (Oct4 & Sox2)) & !(Tcf3 | Gata6))
+Oct4, (((Klf4 | Klf2 | Nanog | (Oct4 & Sox2)) & (Klf2 | !Dnmt3b) & !(Oct4 & Cdx2)) | (!Klf2 & !Gcnf & Dnmt3b & (Klf4 | Klf2 | Nanog | Lrh1 | (Oct4 & Sox2))))
+Pecam1, (!EpiTFs & (Klf2 | Nanog))
+Rex1, (!EpiTFs & (Sox2 | Klf2 | Nanog | Esrrb | Lrh1))
+Smad6, (!Oct4 & (Gata6 | (!Smad7 & Bmp4 & !Smad6 & !iBMP)))
+Smad7, ((Oct4 | Tbx3 | Klf4 | Nanog | Esrrb) & !(Gbx2 | Jarid2))
+Sox2, (Nanog | (Oct4 & Sox2))
+Tcf3, ((Oct4 | Nanog) & !(!Cdx2 & !iWnt & (iGSK3b | (SignalLIF & Fgfr2 & (bFGF | Fgf4)))))
+Cdx2, ((Cdx2 | (!Smad7 & Bmp4 & !Smad6 & !iBMP)) & !(Oct4 & Cdx2))
+Dusp6, (Fgfr2 & !iERK & (bFGF | Fgf4) & !(!Smad7 & Bmp4 & !Smad6 & !iBMP))
+Fgf4, (Nanog | Esrrb | (!Tcf3 & !Cdx2 & !iWnt & (iGSK3b | (SignalLIF & Fgfr2 & (bFGF | Fgf4)))))
+Klf2, (!Pitx2 & !Dusp6 & (Mycn | (Sox2 & Klf4)))
+Lefty1, ((Mycn | (ActivinA & !Smad7 & !iAct) | (!Tcf3 & !Cdx2 & !iWnt & (iGSK3b | (SignalLIF & Fgfr2 & (bFGF | Fgf4)))) | (Oct4 & Sox2)) & !(Fgf4 | Jarid2))
+Lrh1, (!Tcf3 & (Tbx3 | Klf4 | (Oct4 & Sox2)))
+Mycn, (Oct4 & Sox2 & !Nanog)
+Pitx2, (!Sox2 & !Jarid2 & ((ActivinA & !Smad7 & !iAct) | (!Tcf3 & !Cdx2 & !iWnt & (iGSK3b | (SignalLIF & Fgfr2 & (bFGF | Fgf4))))))
+Tbx3, (!Tcf3 & (Tbx3 | (SignalLIF & Fgfr2 & (bFGF | Fgf4))) & (Klf4 | Nanog | Esrrb) & !(Fgfr2 & !iERK & (bFGF | Fgf4) & !(!Smad7 & Bmp4 & !Smad6 & !iBMP)))
+Myc, (!Nanog & (SignalLIF | Gbx2 | (Fgfr2 & !iERK & (bFGF | Fgf4) & !(!Smad7 & Bmp4 & !Smad6 & !iBMP)) | (!Tcf3 & !Cdx2 & !iWnt & (iGSK3b | (SignalLIF & Fgfr2 & (bFGF | Fgf4))))))
+iAct, iAct
+iBMP, iBMP
+iWnt, iWnt
+iERK, iERK
