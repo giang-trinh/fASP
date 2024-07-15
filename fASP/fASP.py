@@ -134,6 +134,7 @@ def place_in_sol(sol: Set[str], place: str) -> str:
         return "'" + place + "'" + ": 1"
     if "n" + place in sol:
         return "'" + place + "'" + ": 0"
+    return ""
 
 
 def get_solutions(
@@ -237,7 +238,6 @@ def compute_fix_points(
         petri_net, max_output, time_limit, method, source_nodes
     )
     print(f"# ASP time = {time.perf_counter() - start:.2f}s")
-    n_fixed_points = 0
 
     if display:
         if solutions_output == "UNSATISFIABLE":
@@ -248,23 +248,18 @@ def compute_fix_points(
                 print("\n".join(", ".join(sol) for sol in solutions))
             else:
                 # deal with source nodes, thus only return the number of fixed points
-                n_fixed_points = get_solutions_source(
-                    solutions_output, places, source_nodes
-                )
+                _ = get_solutions_source(solutions_output, places, source_nodes)
         return
     else:
         if solutions_output == "UNSATISFIABLE":
-            return 0
+            print("0")
         else:
             if method == "conj" or method == "disj":
-                solutions = json.loads(solutions_output)
-                return len(list(solutions["Call"][0]["Witnesses"]))
+                solutions = get_solutions(solutions_output, places)
+                print(len(list(solutions)))
             else:
                 # deal with source nodes, thus only return the number of fixed points
-                n_fixed_points = get_solutions_source(
-                    solutions_output, places, source_nodes
-                )
-                return n_fixed_points
+                print(get_solutions_source(solutions_output, places, source_nodes))
 
 
 def main():
@@ -301,6 +296,12 @@ def main():
         help="ASP encoding to compute fixed points.",
     )
     parser.add_argument(
+        "-c",
+        "--count",
+        action="store_true",
+        help="Count all solutions (but do not display them).",
+    )
+    parser.add_argument(
         "infile",
         type=argparse.FileType("r", encoding="utf-8"),
         nargs="?",
@@ -310,7 +311,7 @@ def main():
     args = parser.parse_args()
     compute_fix_points(
         args.infile,
-        display=True,
+        display=not args.count,
         max_output=args.max,
         time_limit=args.time,
         method=args.encoding,

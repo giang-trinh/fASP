@@ -15,6 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+
 from sys import setrecursionlimit
 from typing import IO
 
@@ -33,7 +34,11 @@ def read_bnet(fileobj: IO, method: str) -> nx.DiGraph:
 
     for line in fileobj.readlines():
         # TODO: a more robust parser
-        if line.startswith("#") or line.startswith("targets, factors"):
+        if (
+            line.startswith("#")
+            or line.startswith("targets, factors")
+            or line.startswith("targets,factors")
+        ):
             continue
         line = line.split("#")[0]
         try:
